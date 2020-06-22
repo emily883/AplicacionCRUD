@@ -1,4 +1,5 @@
 #Aplicacion CRUD
 
-##Creando Interfaz Grafica
-*Aun falta agregar botones*
+##Conexion a bases da datos creada y creacion de table
+
+###Funcionalidad a los demas botones(en espera)
