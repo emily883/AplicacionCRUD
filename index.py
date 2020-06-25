@@ -90,36 +90,52 @@ def crear():
 def leer():
     miConexion=sqlite3.connect("ListaDePersonas")
     micursor=miConexion.cursor()
+    lol="SELECT NOMBRE,PASSWORD, APELLIDO, DIRECCION, COMENTARIOS FROM PERSONAS WHERE ID={0}".format(miID.get())
+   
 
-    micursor.execute("SELECT* FROM PERSONAS")
+    micursor.execute(lol)
     personitas=micursor.fetchall()
 
-    for dato in personitas:
-            miID.set(dato[0])   
-            Miname.set(dato[1]) 
-            passw.set(dato[2]) 
-            ape.set(dato[3]) 
-            dire.set(dato[4]) 
-            comment.set(dato[5])
-        
+    for dato in personitas:  
+            Miname.set(dato[0]) 
+            passw.set(dato[1]) 
+            ape.set(dato[2]) 
+            dire.set(dato[3]) 
+            comment.set(dato[4])
 
 
-
-
-    
-
-
-
-
-
-   
     miConexion.commit()
-
-
     miConexion.close()
 
 
 
+def actualizar():
+    miConexion=sqlite3.connect("ListaDePersonas")
+    micursor=miConexion.cursor()
+
+    actualizacion="UPDATE PERSONAS SET NOMBRE= '{0}', PASSWORD = '{1}', APELLIDO = '{2}', DIRECCION = '{3}', COMENTARIOS = '{4}' WHERE ID={5}".format(Miname.get(), passw.get(), ape.get(), dire.get(), comment.get(),miID.get())
+
+    micursor.execute(actualizacion)
+    
+    miConexion.commit()
+    miConexion.close()
+
+def eliminar():
+        miConexion=sqlite3.connect("ListaDePersonas")
+        micursor=miConexion.cursor()
+
+
+        borrao="DELETE FROM PERSONAS WHERE ID='{0}'".format(miID.get())
+
+        micursor.execute(borrao)
+
+        limpiarCampos()
+
+
+
+
+        miConexion.commit()
+        miConexion.close()
 
 
 
@@ -135,8 +151,8 @@ ayuda.add_command(label="Acerca de...")
 CRUD=Menu(barramenu, tearoff=0 )
 CRUD.add_command(label="Crear", command=crear)
 CRUD.add_command(label="Leer", command=leer)
-CRUD.add_command(label="Actualizar")
-CRUD.add_command(label="Borrar")
+CRUD.add_command(label="Actualizar", command=actualizar)
+CRUD.add_command(label="Borrar", command=eliminar)
 
 
 BBDD=Menu(barramenu, tearoff=0)
@@ -182,8 +198,8 @@ comentario.config(yscrollcommand=scrollvert.set)'''
 
 crear=Button(frame, text="Crear", command=crear).grid(row=1, column=0, padx=7, pady=7)
 leer=Button(frame, text="Leer", command=leer).grid(row=1, column=1, padx=7, pady=7)
-actualizar=Button(frame, text="Actualizar").grid(row=1, column=2, padx=7, pady=7)
-eliminar=Button(frame, text="Eliminar").grid(row=1, column=3, padx=7, pady=7)
+actualizar=Button(frame, text="Actualizar", command= actualizar).grid(row=1, column=2, padx=7, pady=7)
+eliminar=Button(frame, text="Eliminar", command=eliminar).grid(row=1, column=3, padx=7, pady=7)
 
 #-------------------------------------------------------------------------
 
