@@ -1,5 +1,5 @@
 #Aplicacion CRUD
 
-##Conexion a bases da datos creada y creacion de table
+##Conexion a bases da datos creada y creacion de la tabla
 
-###Funcionalidad a los demas botones(en espera)
+###Agregar personas a la base de datos y accediendo a ellas perfectamente mostrado en pantalla
